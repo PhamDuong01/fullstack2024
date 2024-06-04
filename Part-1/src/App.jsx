@@ -3,9 +3,10 @@ import { useState } from 'react';
 const StatisticLine = (props) => {
     const { text, value } = props;
     return (
-        <p>
-            {text} {value}
-        </p>
+        <tr>
+            <td>{text}</td>
+            <td>{value}</td>
+        </tr>
     );
 };
 
@@ -14,21 +15,29 @@ const Statistics = ({ good, neutral, bad }) => {
     const positive = (good / (good + neutral + bad)) * 100 || 0;
 
     return (
-        <div>
-            <h1>statistics</h1>
-            {!(good + neutral + bad) ? (
-                <StatisticLine text='No feedback given' value='' />
-            ) : (
-                <div>
-                    <StatisticLine text='good' value={good} />
-                    <StatisticLine text='neutral' value={neutral} />
-                    <StatisticLine text='bad' value={bad} />
-                    <StatisticLine text='all' value={good + neutral + bad} />
-                    <StatisticLine text='average' value={average} />
-                    <StatisticLine text='positive' value={`${positive} %`} />
-                </div>
-            )}
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        <h1>statistics</h1>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {!(good + neutral + bad) ? (
+                    <StatisticLine text='No feedback given' value='' />
+                ) : (
+                    <>
+                        <StatisticLine text='good' value={good} />
+                        <StatisticLine text='neutral' value={neutral} />
+                        <StatisticLine text='bad' value={bad} />
+                        <StatisticLine text='all' value={good + neutral + bad} />
+                        <StatisticLine text='average' value={average} />
+                        <StatisticLine text='positive' value={`${positive} %`} />
+                    </>
+                )}
+            </tbody>
+        </table>
     );
 };
 
